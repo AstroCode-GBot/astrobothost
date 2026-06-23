@@ -61,6 +61,10 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     main_file = db.Column(db.String(255), default='app.py')
 
+# ADD THIS
+with app.app_context():
+    db.create_all()
+  
     def get_container_path(self):
         """Returns the dedicated directory path for this user's files."""
         path = os.path.join(DATA_BASE_DIR, 'files', str(self.id))
