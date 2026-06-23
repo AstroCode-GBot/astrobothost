@@ -27,7 +27,12 @@ os.makedirs(DATA_BASE_DIR, exist_ok=True)
 
 # Use SQLite for local file-based storage.
 # The database will be a single file named 'app.db' in the DATA_BASE_DIR.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(DATA_BASE_DIR, 'app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"mysql+pymysql://{os.getenv('DB_USER')}:"
+    f"{os.getenv('DB_PASSWORD')}@"
+    f"{os.getenv('DB_HOST')}/"
+    f"{os.getenv('DB_NAME')}"
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize extensions
